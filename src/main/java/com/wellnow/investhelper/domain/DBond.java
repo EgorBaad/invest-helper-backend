@@ -18,5 +18,5 @@ public class DBond {
     Integer lot;
     String currency;
     String name;
-    MoneyValue nominal;
+    //MoneyValue nominal;
 }
