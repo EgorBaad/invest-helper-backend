@@ -1,17 +1,15 @@
 package com.wellnow.investhelper.adapter.tinkoff;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
-import com.wellnow.investhelper.app.api.account.GetAccountsOutbound;
+import com.wellnow.investhelper.app.api.bond.GetBondByFigiOutbound;
 import com.wellnow.investhelper.domain.Token;
 
-import ru.tinkoff.piapi.contract.v1.Account;
+import ru.tinkoff.piapi.contract.v1.Bond;
 import ru.tinkoff.piapi.core.InvestApi;
 
 @Component
-public class AccountAdapter implements GetAccountsOutbound {
+public class BondAdapter implements GetBondByFigiOutbound {
     private InvestApi api;
 
     public void init() {
@@ -19,8 +17,8 @@ public class AccountAdapter implements GetAccountsOutbound {
     }
 
     @Override
-    public List<Account> getAccounts() {
+    public Bond getBondByFigi(String figi) {
         init();
-        return api.getUserService().getAccountsSync();
+        return api.getInstrumentsService().getBondByFigiSync(figi);
     }
 }
