@@ -17,6 +17,6 @@ public class GetShareByFigiUseCase implements GetShareByFigiInbound {
     @Override
     public DShare execute(String figi) {
         Share share = getShareByFigiOutbound.getShareByFigi(figi);
-        return new DShare(share.getFigi(), share.getName(), share.getTicker(), share.getCurrency(), share.getCountryOfRisk());
+        return new DShare(share);
     }
 }

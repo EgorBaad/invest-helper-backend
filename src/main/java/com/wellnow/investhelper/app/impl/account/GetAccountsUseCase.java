@@ -22,7 +22,7 @@ public class GetAccountsUseCase implements GetAccountsInbound {
         List<Account> accountList = getAccountsOutbound.getAccounts();
         List<DAccount> dAccountList = new ArrayList<>();
         for (Account account : accountList) {
-            DAccount dAccount = new DAccount(account.getId(), account.getName(), account.getType());
+            DAccount dAccount = new DAccount(account);
             dAccountList.add(dAccount);
         }
 

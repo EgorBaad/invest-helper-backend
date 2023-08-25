@@ -17,6 +17,6 @@ public class GetBondByFigiUseCase implements GetBondByFigiInbound {
     @Override
     public DBond execute(String figi) {
         Bond bond = getBondByFigiOutbound.getBondByFigi(figi);
-        return new DBond(bond.getFigi(), bond.getTicker(), bond.getLot(), bond.getCurrency(), bond.getName()/* , bond.getNominal()*/);
+        return new DBond(bond);
     }
 }

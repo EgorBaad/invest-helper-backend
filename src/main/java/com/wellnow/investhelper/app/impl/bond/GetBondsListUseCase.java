@@ -22,7 +22,7 @@ public class GetBondsListUseCase implements GetBondsListInbound {
         List<Bond> bondList = getBondsListOutbound.getBondsList();
         List<DBond> dBondList = new ArrayList<>();
         for (Bond bond : bondList) {
-            DBond dBond = new DBond(bond.getFigi(), bond.getTicker(), bond.getLot(), bond.getCurrency(), bond.getName()/*, bond.getNominal()*/);
+            DBond dBond = new DBond(bond);
             dBondList.add(dBond);
         }
 

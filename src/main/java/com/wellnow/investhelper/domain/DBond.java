@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.tinkoff.piapi.contract.v1.MoneyValue;
+import ru.tinkoff.piapi.contract.v1.Bond;
 
 @ToString
 @AllArgsConstructor
@@ -18,5 +18,14 @@ public class DBond {
     Integer lot;
     String currency;
     String name;
-    //MoneyValue nominal;
+    DMoneyValue nominal;
+
+    public DBond(Bond bond) {
+        this.figi = bond.getFigi();
+        this.ticker = bond.getTicker();
+        this.lot = bond.getLot();
+        this.currency = bond.getCurrency();
+        this.name = bond.getName();
+        this.nominal = new DMoneyValue(bond.getNominal());
+    }
 }

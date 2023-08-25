@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ru.tinkoff.piapi.contract.v1.Share;
 
 @ToString
 @AllArgsConstructor
@@ -17,4 +18,12 @@ public class DShare {
     String ticker;
     String currency;
     String country;
+
+    public DShare(Share share) {
+        this.figi = share.getFigi();
+        this.name = share.getName();
+        this.ticker = share.getTicker();
+        this.currency = share.getCurrency();
+        this.country = share.getCountryOfRisk();
+    }
 }
