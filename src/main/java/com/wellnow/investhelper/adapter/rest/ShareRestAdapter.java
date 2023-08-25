@@ -1,7 +1,6 @@
 package com.wellnow.investhelper.adapter.rest;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import com.wellnow.investhelper.domain.DShare;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("share")
 @RequiredArgsConstructor
 public class ShareRestAdapter {
