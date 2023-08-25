@@ -15,8 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TokenRestAdapter {
     @PutMapping("/set") //http://127.0.0.1:8888/token/set
-    public ResponseEntity<String> setToken(@RequestParam String token) {
-        Token.setToken(token);
-        return ResponseEntity.ok("good");
+    public ResponseEntity<Boolean> setToken(@RequestParam String token) {
+        return ResponseEntity.ok(Token.setToken(token));
     }
 }
