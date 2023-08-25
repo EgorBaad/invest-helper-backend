@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import ru.tinkoff.piapi.contract.v1.MoneyValue;
+import ru.tinkoff.piapi.core.models.Money;
 
 @ToString
 @AllArgsConstructor
@@ -23,5 +24,10 @@ public class DMoneyValue {
         this.units = mv.getUnits();
         this.nano = mv.getNano();
         this.value = this.units.doubleValue() + (this.nano / Math.pow(10, String.valueOf(this.nano).length()));
+    }
+
+    public DMoneyValue(Money money) {
+        this.currency = money.getCurrency();
+        this.value = money.getValue().doubleValue();
     }
 }
