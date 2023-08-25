@@ -15,15 +15,11 @@ import ru.tinkoff.piapi.core.models.Money;
 @Setter
 public class DMoneyValue {
     String currency;
-    Long units;
-    Integer nano;
     Double value;
 
     public DMoneyValue(MoneyValue mv) {
         this.currency = mv.getCurrency();
-        this.units = mv.getUnits();
-        this.nano = mv.getNano();
-        this.value = this.units.doubleValue() + (this.nano / Math.pow(10, String.valueOf(this.nano).length()));
+        this.value = mv.getUnits() + (mv.getNano() / Math.pow(10, String.valueOf(mv.getNano()).length()));
     }
 
     public DMoneyValue(Money money) {

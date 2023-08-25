@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import ru.tinkoff.piapi.contract.v1.Share;
+import ru.tinkoff.piapi.core.models.Position;
 
 @ToString
 @AllArgsConstructor
@@ -25,5 +26,9 @@ public class DShare {
         this.ticker = share.getTicker();
         this.currency = share.getCurrency();
         this.country = share.getCountryOfRisk();
+    }
+
+    public DShare(Position position) {
+        this.figi = position.getFigi();
     }
 }

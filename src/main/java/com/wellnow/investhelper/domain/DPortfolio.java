@@ -1,6 +1,6 @@
 package com.wellnow.investhelper.domain;
 
-import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +16,16 @@ import ru.tinkoff.piapi.core.models.Portfolio;
 @Setter
 public class DPortfolio {
     DMoneyValue totalAmount;
-    List<DShare> shareList;
+    Map<DShare,DPosition> sharePositions;
+    Map<DBond,DPosition> bondPositions;
 
     public DPortfolio (Portfolio portfolio) {
         this.totalAmount = new DMoneyValue(portfolio.getTotalAmountPortfolio());
+    }
+
+    public DPortfolio(Portfolio portfolio, Map<DShare, DPosition> shareList, Map<DBond, DPosition> bondList) {
+        this.totalAmount = new DMoneyValue(portfolio.getTotalAmountPortfolio());
+        this.sharePositions = shareList;
+        this.bondPositions = bondList;
     }
 }
