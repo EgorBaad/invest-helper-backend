@@ -18,6 +18,7 @@ public class DPosition {
     String type;
     DMoneyValue avgPrice;
     DMoneyValue currentPrice;
+    DInstrument instrumentInfo;
 
     public DPosition(Position position) {
         this.figi = position.getFigi();
@@ -25,5 +26,14 @@ public class DPosition {
         this.quantity = position.getQuantity().doubleValue();
         this.avgPrice = new DMoneyValue(position.getAveragePositionPrice());
         this.currentPrice = new DMoneyValue(position.getCurrentPrice());
+    }
+
+    public DPosition(Position position, DInstrument instrument) {
+        this.figi = position.getFigi();
+        this.type = position.getInstrumentType();
+        this.quantity = position.getQuantity().doubleValue();
+        this.avgPrice = new DMoneyValue(position.getAveragePositionPrice());
+        this.currentPrice = new DMoneyValue(position.getCurrentPrice());
+        this.instrumentInfo = instrument;
     }
 }

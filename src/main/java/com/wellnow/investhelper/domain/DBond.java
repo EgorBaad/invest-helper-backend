@@ -12,12 +12,7 @@ import ru.tinkoff.piapi.contract.v1.Bond;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DBond {
-    String figi;
-    String ticker;
-    Integer lot;
-    String currency;
-    String name;
+public class DBond extends DInstrument {
     DMoneyValue nominal;
 
     public DBond(Bond bond) {
@@ -25,6 +20,7 @@ public class DBond {
         this.ticker = bond.getTicker();
         this.lot = bond.getLot();
         this.currency = bond.getCurrency();
+        this.country = bond.getCountryOfRisk();
         this.name = bond.getName();
         this.nominal = new DMoneyValue(bond.getNominal());
     }

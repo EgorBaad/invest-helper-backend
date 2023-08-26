@@ -1,8 +1,7 @@
 package com.wellnow.investhelper.app.impl.portfolio;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.bond.GetBondByFigiInbound;
@@ -28,21 +27,20 @@ public class GetPortfolioUseCase implements GetPortfolioInbound {
     @Override
     public DPortfolio execute(String accountId) {
         Portfolio portfolio = getPortfolioOutbound.getPortfolio(accountId);
-        Map<DShare, DPosition> shareList = new HashMap<DShare,DPosition>();
-        Map<DBond, DPosition> bondList = new HashMap<DBond, DPosition>();
+        List<DPosition> positionList = new ArrayList<>();
         for (Position position : portfolio.getPositions()) {
             switch (position.getInstrumentType()) {
                 case "share": {
                     DShare share = getShareByFigiInbound.execute(position.getFigi());
                     if (share != null) {
-                        shareList.put(share, new DPosition(position));
+                        positionList.add(new DPosition(position, share));
                     }
                     break;
                 }
                 case "bond": {
                     DBond bond = getBondByFigiInbound.execute(position.getFigi());
                     if (bond != null) {
-                        bondList.put(bond, new DPosition(position));
+                        positionList.add(new DPosition(position, bond));
                     }
                     break;
                 }
@@ -51,6 +49,6 @@ public class GetPortfolioUseCase implements GetPortfolioInbound {
                 }
             }
         }
-        return new DPortfolio(portfolio, shareList, bondList);
+        return new DPortfolio(portfolio, positionList);
     }
 }
