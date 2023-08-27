@@ -10,13 +10,14 @@ public class Token {
     }
 
     public static boolean setToken(String inToken) {
-        token = inToken;
+        if (inToken == null) return false;
         try {
             InvestApi api = InvestApi.create(inToken);
             api.getInstrumentsService().getAllCurrenciesSync();
         } catch (Exception e) {
             return false;
         }
+        token = inToken;
         return true;
     }
 }
