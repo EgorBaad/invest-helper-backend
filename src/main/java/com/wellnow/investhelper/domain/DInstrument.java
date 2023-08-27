@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ru.tinkoff.piapi.contract.v1.InstrumentShort;
 
 @ToString
 @AllArgsConstructor
@@ -19,4 +20,11 @@ public class DInstrument {
     String country;
     Integer lot;
     String type;
+
+    public DInstrument(InstrumentShort instrument) {
+        this.figi = instrument.getFigi();
+        this.ticker = instrument.getTicker();
+        this.name = instrument.getName();
+        this.type = instrument.getInstrumentType();
+    }
 }
