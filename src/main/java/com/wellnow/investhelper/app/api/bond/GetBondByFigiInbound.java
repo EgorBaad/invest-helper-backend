@@ -3,5 +3,5 @@ package com.wellnow.investhelper.app.api.bond;
 import com.wellnow.investhelper.domain.DBond;
 
 public interface GetBondByFigiInbound {
-    public DBond execute(String figi);
+    public DBond execute(String token, String figi);
 }

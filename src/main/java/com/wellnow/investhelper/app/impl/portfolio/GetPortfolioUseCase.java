@@ -25,20 +25,20 @@ public class GetPortfolioUseCase implements GetPortfolioInbound {
     private final GetBondByFigiInbound getBondByFigiInbound;
 
     @Override
-    public DPortfolio execute(String accountId) {
-        Portfolio portfolio = getPortfolioOutbound.getPortfolio(accountId);
+    public DPortfolio execute(String token, String accountId) {
+        Portfolio portfolio = getPortfolioOutbound.getPortfolio(token, accountId);
         List<DPosition> positionList = new ArrayList<>();
         for (Position position : portfolio.getPositions()) {
             switch (position.getInstrumentType()) {
                 case "share": {
-                    DShare share = getShareByFigiInbound.execute(position.getFigi());
+                    DShare share = getShareByFigiInbound.execute(token, position.getFigi());
                     if (share != null) {
                         positionList.add(new DPosition(position, share));
                     }
                     break;
                 }
                 case "bond": {
-                    DBond bond = getBondByFigiInbound.execute(position.getFigi());
+                    DBond bond = getBondByFigiInbound.execute(token, position.getFigi());
                     if (bond != null) {
                         positionList.add(new DPosition(position, bond));
                     }

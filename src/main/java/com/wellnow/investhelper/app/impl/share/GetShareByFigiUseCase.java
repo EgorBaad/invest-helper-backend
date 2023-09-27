@@ -15,8 +15,8 @@ public class GetShareByFigiUseCase implements GetShareByFigiInbound {
     private final GetShareByFigiOutbound getShareByFigiOutbound;
     
     @Override
-    public DShare execute(String figi) {
-        Share share = getShareByFigiOutbound.getShareByFigi(figi);
+    public DShare execute(String token, String figi) {
+        Share share = getShareByFigiOutbound.getShareByFigi(token, figi);
         return new DShare(share);
     }
 }

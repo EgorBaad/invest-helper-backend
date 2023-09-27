@@ -18,8 +18,8 @@ public class GetAccountsUseCase implements GetAccountsInbound {
     private final GetAccountsOutbound getAccountsOutbound;
 
     @Override
-    public List<DAccount> execute() {
-        List<Account> accountList = getAccountsOutbound.getAccounts();
+    public List<DAccount> execute(String token) {
+        List<Account> accountList = getAccountsOutbound.getAccounts(token);
         List<DAccount> dAccountList = new ArrayList<>();
         for (Account account : accountList) {
             DAccount dAccount = new DAccount(account);

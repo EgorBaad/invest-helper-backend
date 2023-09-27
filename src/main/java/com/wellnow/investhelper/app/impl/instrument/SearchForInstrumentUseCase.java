@@ -18,8 +18,8 @@ public class SearchForInstrumentUseCase implements SearchForInstrumentInbound {
     private final SearchForInstrumentOutbound searchForBondOutbound;
     
     @Override
-    public List<DInstrument> execute(String searchString, String type) {
-        List<InstrumentShort> instruments = searchForBondOutbound.searchForInstrument(searchString, type);
+    public List<DInstrument> execute(String token, String searchString, String type) {
+        List<InstrumentShort> instruments = searchForBondOutbound.searchForInstrument(token, searchString, type);
         List<DInstrument> instrList = new ArrayList<>();
         for (InstrumentShort instrument : instruments) {
             instrList.add(new DInstrument(instrument));

@@ -3,7 +3,6 @@ package com.wellnow.investhelper.adapter.tinkoff;
 import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.portfolio.GetPortfolioOutbound;
-import com.wellnow.investhelper.domain.Token;
 
 import lombok.RequiredArgsConstructor;
 import ru.tinkoff.piapi.core.InvestApi;
@@ -14,13 +13,13 @@ import ru.tinkoff.piapi.core.models.Portfolio;
 public class PortfolioAdapter implements GetPortfolioOutbound {
     private InvestApi api;
 
-    public void init() {
-        api = InvestApi.create(Token.getToken());
+    public void init(String token) {
+        if (token != null) {api = InvestApi.create(token);}
     }
 
     @Override
-    public Portfolio getPortfolio(String accountId) {
-        init();
+    public Portfolio getPortfolio(String token, String accountId) {
+        init(token);
         return api.getOperationsService().getPortfolioSync(accountId);
     }
 }

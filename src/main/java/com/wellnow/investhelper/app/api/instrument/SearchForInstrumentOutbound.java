@@ -5,5 +5,5 @@ import java.util.List;
 import ru.tinkoff.piapi.contract.v1.InstrumentShort;
 
 public interface SearchForInstrumentOutbound {
-    public List<InstrumentShort> searchForInstrument(String searchString, String type);
+    public List<InstrumentShort> searchForInstrument(String token, String searchString, String type);
 }

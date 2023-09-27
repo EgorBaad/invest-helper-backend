@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,10 @@ public class AccountRestAdapter {
     private final GetAccountsInbound getAccountsInbound;
 
     @GetMapping("/all") //http://127.0.0.1:8888/account/all
-    public ResponseEntity<List<DAccount>> getShareByFigi() {
-        return ResponseEntity.ok(getAccountsInbound.execute());
+    public ResponseEntity<List<DAccount>> getShareByFigi(@RequestHeader("token") String token) {
+        if (token == null || token == "") {
+            return ResponseEntity.badRequest().body(null);
+        }
+        return ResponseEntity.ok(getAccountsInbound.execute(token));
     }
 }

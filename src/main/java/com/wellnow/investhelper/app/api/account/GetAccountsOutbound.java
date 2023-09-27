@@ -5,5 +5,5 @@ import java.util.List;
 import ru.tinkoff.piapi.contract.v1.Account;
 
 public interface GetAccountsOutbound {
-    public List<Account> getAccounts();
+    public List<Account> getAccounts(String token);
 }

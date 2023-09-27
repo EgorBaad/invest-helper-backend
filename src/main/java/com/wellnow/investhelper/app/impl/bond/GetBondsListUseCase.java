@@ -18,8 +18,8 @@ public class GetBondsListUseCase implements GetBondsListInbound {
     private final GetBondsListOutbound getBondsListOutbound;
 
     @Override
-    public List<DBond> execute() {
-        List<Bond> bondList = getBondsListOutbound.getBondsList();
+    public List<DBond> execute(String token) {
+        List<Bond> bondList = getBondsListOutbound.getBondsList(token);
         List<DBond> dBondList = new ArrayList<>();
         for (Bond bond : bondList) {
             DBond dBond = new DBond(bond);
