@@ -3,21 +3,32 @@ package com.wellnow.investhelper.adapter.tinkoff;
 import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.share.GetShareByFigiOutbound;
+import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
+import com.wellnow.investhelper.app.exception.InvalidTokenException;
 
 import ru.tinkoff.piapi.contract.v1.Share;
 import ru.tinkoff.piapi.core.InvestApi;
+import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 
 @Component
 public class ShareAdapter implements GetShareByFigiOutbound {
-    private InvestApi api;
-
-    public void init(String token) {
-        if (token != null) {api = InvestApi.create(token);}
-    }
-
     @Override
-    public Share getShareByFigi(String token, String figi) {
-        init(token);
-        return api.getInstrumentsService().getShareByFigiSync(figi);
+    public Share getShareByFigi(String token, String figi) throws InvalidTokenException, InvalidApiRequestException {
+        InvestApi api = null;
+        if (token != null) {
+            api = InvestApi.create(token);
+        } else {
+            throw new InvalidTokenException("Invalid token " + token);
+        }
+        if (figi != null && !figi.equals("")) {
+            try {
+                return api.getInstrumentsService().getShareByFigiSync(figi);
+            } catch (ApiRuntimeException e) {
+                throw new InvalidApiRequestException("Invalid request: " + e.getMessage());
+            }
+
+        } else {
+            throw new InvalidApiRequestException("Invalid request. Empty FIGI.");
+        }
     }
 }

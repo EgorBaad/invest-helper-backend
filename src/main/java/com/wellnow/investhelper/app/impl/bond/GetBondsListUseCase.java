@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.bond.GetBondsListInbound;
 import com.wellnow.investhelper.app.api.bond.GetBondsListOutbound;
+import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
+import com.wellnow.investhelper.app.exception.InvalidTokenException;
 import com.wellnow.investhelper.domain.DBond;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,7 @@ public class GetBondsListUseCase implements GetBondsListInbound {
     private final GetBondsListOutbound getBondsListOutbound;
 
     @Override
-    public List<DBond> execute(String token) {
+    public List<DBond> execute(String token) throws InvalidTokenException, InvalidApiRequestException {
         List<Bond> bondList = getBondsListOutbound.getBondsList(token);
         List<DBond> dBondList = new ArrayList<>();
         for (Bond bond : bondList) {

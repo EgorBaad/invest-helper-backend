@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellnow.investhelper.app.api.instrument.SearchForInstrumentInbound;
+import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
+import com.wellnow.investhelper.app.exception.InvalidTokenException;
 import com.wellnow.investhelper.domain.DInstrument;
 
 import lombok.RequiredArgsConstructor;
@@ -18,13 +20,15 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("instrument")
 @RequiredArgsConstructor
 public class InstrumentRestAdapter {
-    private final SearchForInstrumentInbound searchForInstrumentInbound;    
-    
+    private final SearchForInstrumentInbound searchForInstrumentInbound;
+
     @GetMapping("/search")
-    public ResponseEntity<List<DInstrument>> getBondByFigi(@RequestHeader("token") String token, @RequestParam String searchString) {
+    public ResponseEntity<List<DInstrument>> getBondByFigi(@RequestHeader("token") String token,
+            @RequestParam String searchString) throws InvalidTokenException, InvalidApiRequestException {
         if (token == null || token == "") {
             return ResponseEntity.badRequest().body(null);
         }
+        
         return ResponseEntity.ok(searchForInstrumentInbound.execute(token, searchString, ""));
     }
 }

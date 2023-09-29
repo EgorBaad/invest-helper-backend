@@ -8,6 +8,8 @@ import com.wellnow.investhelper.app.api.bond.GetBondByFigiInbound;
 import com.wellnow.investhelper.app.api.portfolio.GetPortfolioInbound;
 import com.wellnow.investhelper.app.api.portfolio.GetPortfolioOutbound;
 import com.wellnow.investhelper.app.api.share.GetShareByFigiInbound;
+import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
+import com.wellnow.investhelper.app.exception.InvalidTokenException;
 import com.wellnow.investhelper.domain.DBond;
 import com.wellnow.investhelper.domain.DPortfolio;
 import com.wellnow.investhelper.domain.DPosition;
@@ -25,7 +27,7 @@ public class GetPortfolioUseCase implements GetPortfolioInbound {
     private final GetBondByFigiInbound getBondByFigiInbound;
 
     @Override
-    public DPortfolio execute(String token, String accountId) {
+    public DPortfolio execute(String token, String accountId) throws InvalidTokenException, InvalidApiRequestException {
         Portfolio portfolio = getPortfolioOutbound.getPortfolio(token, accountId);
         List<DPosition> positionList = new ArrayList<>();
         for (Position position : portfolio.getPositions()) {

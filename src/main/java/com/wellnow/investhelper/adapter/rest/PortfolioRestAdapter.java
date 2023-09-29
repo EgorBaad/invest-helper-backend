@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellnow.investhelper.app.api.portfolio.GetPortfolioInbound;
+import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
+import com.wellnow.investhelper.app.exception.InvalidTokenException;
 import com.wellnow.investhelper.domain.DPortfolio;
 
 import lombok.RequiredArgsConstructor;
@@ -19,10 +21,12 @@ public class PortfolioRestAdapter {
     private final GetPortfolioInbound getPortfolioInbound;
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<DPortfolio> getAllBonds(@RequestHeader("token") String token, @PathVariable String accountId) {
+    public ResponseEntity<DPortfolio> getAllBonds(@RequestHeader("token") String token, @PathVariable String accountId)
+            throws InvalidTokenException, InvalidApiRequestException {
         if (token == null || token == "") {
             return ResponseEntity.badRequest().body(null);
         }
+
         return ResponseEntity.ok(getPortfolioInbound.execute(token, accountId));
     }
 }
