@@ -20,6 +20,7 @@ public class DInstrument {
     String country;
     Integer lot;
     String type;
+    Boolean qualOnly;
 
     public DInstrument(InstrumentShort instrument) {
         this.figi = instrument.getFigi();

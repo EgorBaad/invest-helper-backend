@@ -16,6 +16,7 @@ public class DShare extends DInstrument {
         this.ticker = share.getTicker();
         this.currency = share.getCurrency();
         this.country = share.getCountryOfRisk();
+        this.qualOnly = share.getForQualInvestorFlag();
     }
 
     public DShare(Position position) {

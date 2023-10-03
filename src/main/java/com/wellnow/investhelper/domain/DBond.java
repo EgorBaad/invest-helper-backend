@@ -23,5 +23,6 @@ public class DBond extends DInstrument {
         this.country = bond.getCountryOfRisk();
         this.name = bond.getName();
         this.nominal = new DMoneyValue(bond.getNominal());
+        this.qualOnly = bond.getForQualInvestorFlag();
     }
 }
