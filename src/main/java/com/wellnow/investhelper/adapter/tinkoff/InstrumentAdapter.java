@@ -21,9 +21,9 @@ public class InstrumentAdapter implements SearchForInstrumentOutbound {
         if (token != null) {
             api = InvestApi.create(token);
         } else {
-            throw new InvalidTokenException("Invalid token " + token);
+            throw new InvalidTokenException("Invalid token null");
         }
-        if (searchString != null && !searchString.equals("")) {
+        if (searchString != null && !searchString.isEmpty()) {
             try {
                 return api.getInstrumentsService().findInstrumentSync(searchString);
             } catch (ApiRuntimeException e) {

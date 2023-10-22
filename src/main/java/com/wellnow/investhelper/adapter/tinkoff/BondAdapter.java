@@ -21,9 +21,9 @@ public class BondAdapter implements GetBondByFigiOutbound, GetBondsListOutbound 
         if (token != null) {
             api = InvestApi.create(token);
         } else {
-            throw new InvalidTokenException("Invalid token " + token);
+            throw new InvalidTokenException("Invalid token null");
         }
-        if (figi != null && !figi.equals("")) {
+        if (figi != null && !figi.isEmpty()) {
             try {
                 return api.getInstrumentsService().getBondByFigiSync(figi);
             } catch (ApiRuntimeException e) {

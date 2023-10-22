@@ -14,13 +14,13 @@ import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 public class ShareAdapter implements GetShareByFigiOutbound {
     @Override
     public Share getShareByFigi(String token, String figi) throws InvalidTokenException, InvalidApiRequestException {
-        InvestApi api = null;
+        InvestApi api;
         if (token != null) {
             api = InvestApi.create(token);
         } else {
-            throw new InvalidTokenException("Invalid token " + token);
+            throw new InvalidTokenException("Invalid token null");
         }
-        if (figi != null && !figi.equals("")) {
+        if (figi != null && !figi.isEmpty()) {
             try {
                 return api.getInstrumentsService().getShareByFigiSync(figi);
             } catch (ApiRuntimeException e) {

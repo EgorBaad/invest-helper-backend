@@ -21,9 +21,9 @@ public class PortfolioAdapter implements GetPortfolioOutbound {
         if (token != null) {
             api = InvestApi.create(token);
         } else {
-            throw new InvalidTokenException("Invalid token " + token);
+            throw new InvalidTokenException("Invalid token null");
         }
-        if (accountId != null && !accountId.equals("")) {
+        if (accountId != null && !accountId.isEmpty()) {
             try {
                 return api.getOperationsService().getPortfolioSync(accountId);
             } catch (ApiRuntimeException e) {

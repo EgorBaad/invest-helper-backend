@@ -20,7 +20,7 @@ public class AccountAdapter implements GetAccountsOutbound {
         if (token != null) {
             api = InvestApi.create(token);
         } else {
-            throw new InvalidTokenException("Invalid token " + token);
+            throw new InvalidTokenException("Invalid token null");
         }
         try {
             return api.getUserService().getAccountsSync();
