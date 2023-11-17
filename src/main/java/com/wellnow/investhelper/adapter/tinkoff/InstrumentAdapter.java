@@ -2,6 +2,7 @@ package com.wellnow.investhelper.adapter.tinkoff;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.instrument.SearchForInstrumentOutbound;
@@ -12,12 +13,16 @@ import ru.tinkoff.piapi.contract.v1.InstrumentShort;
 import ru.tinkoff.piapi.core.InvestApi;
 import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 
+import javax.annotation.PreDestroy;
+
 @Component
+@Slf4j
 public class InstrumentAdapter implements SearchForInstrumentOutbound {
+    private InvestApi api;
+
     @Override
     public List<InstrumentShort> searchForInstrument(String token, String searchString, String type)
             throws InvalidTokenException, InvalidApiRequestException {
-        InvestApi api;
         if (token != null) {
             api = InvestApi.create(token);
         } else {
@@ -28,6 +33,9 @@ public class InstrumentAdapter implements SearchForInstrumentOutbound {
                 return api.getInstrumentsService().findInstrumentSync(searchString);
             } catch (ApiRuntimeException e) {
                 throw new InvalidApiRequestException("Invalid request. " + e.getMessage());
+            } finally {
+                log.info("InstrumentAdapter for Account adapter run");
+                api.destroy(3);
             }
         } else {
             throw new InvalidApiRequestException("Invalid request. Empty searchString.");

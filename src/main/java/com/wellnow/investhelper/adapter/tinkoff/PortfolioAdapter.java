@@ -1,5 +1,6 @@
 package com.wellnow.investhelper.adapter.tinkoff;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import com.wellnow.investhelper.app.api.portfolio.GetPortfolioOutbound;
@@ -11,9 +12,13 @@ import ru.tinkoff.piapi.core.InvestApi;
 import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 import ru.tinkoff.piapi.core.models.Portfolio;
 
+import javax.annotation.PreDestroy;
+
 @Component
-@RequiredArgsConstructor
+@Slf4j
 public class PortfolioAdapter implements GetPortfolioOutbound {
+    InvestApi api;
+
     @Override
     public Portfolio getPortfolio(String token, String accountId)
             throws InvalidTokenException, InvalidApiRequestException {
@@ -28,8 +33,13 @@ public class PortfolioAdapter implements GetPortfolioOutbound {
                 return api.getOperationsService().getPortfolioSync(accountId);
             } catch (ApiRuntimeException e) {
                 throw new InvalidApiRequestException("Invalid request: " + e.getMessage());
+            } finally {
+                log.info("PortfolioAdapter for Account adapter run");
+                api.destroy(3);
             }
         } else {
+            log.info("PortfolioAdapter for Account adapter run");
+            api.destroy(3);
             throw new InvalidApiRequestException("Invalid request. Empty accountId.");
         }
     }
