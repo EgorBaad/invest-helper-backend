@@ -7,12 +7,9 @@ import com.wellnow.investhelper.app.api.portfolio.GetPortfolioOutbound;
 import com.wellnow.investhelper.app.exception.InvalidApiRequestException;
 import com.wellnow.investhelper.app.exception.InvalidTokenException;
 
-import lombok.RequiredArgsConstructor;
 import ru.tinkoff.piapi.core.InvestApi;
 import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 import ru.tinkoff.piapi.core.models.Portfolio;
-
-import javax.annotation.PreDestroy;
 
 @Component
 @Slf4j

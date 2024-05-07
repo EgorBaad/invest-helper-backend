@@ -11,8 +11,6 @@ import ru.tinkoff.piapi.contract.v1.Share;
 import ru.tinkoff.piapi.core.InvestApi;
 import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 
-import javax.annotation.PreDestroy;
-
 @Component
 @Slf4j
 public class ShareAdapter implements GetShareByFigiOutbound {

@@ -21,6 +21,7 @@ public class DInstrument {
     Integer lot;
     String type;
     Boolean qualOnly;
+    DMarketData marketData;
 
     public DInstrument(InstrumentShort instrument) {
         this.figi = instrument.getFigi();

@@ -13,8 +13,6 @@ import ru.tinkoff.piapi.contract.v1.InstrumentShort;
 import ru.tinkoff.piapi.core.InvestApi;
 import ru.tinkoff.piapi.core.exception.ApiRuntimeException;
 
-import javax.annotation.PreDestroy;
-
 @Component
 @Slf4j
 public class InstrumentAdapter implements SearchForInstrumentOutbound {
